@@ -6,37 +6,27 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return "Welcome to the YouTube Audio Extractor API!"
+
 @app.route('/get_audio', methods=['GET'])
 def get_audio():
-    print("Received request")  # Debugging step
-    video_url = request.args.get('url')
-    if not video_url:
-        print("No URL provided")
-        return jsonify({'error': 'No URL provided'}), 400
+    url = request.args.get("url")
+    if not url:
+        return jsonify({"error": "No URL provided"}), 400
 
-    print("Video URL received:", video_url)
-
-    # Replace with an actual working API
-    api_endpoint = 'https://some-youtube-audio-api.com/extract'
-    params = {'video_url': video_url, 'format': 'mp3'}
+    print(f"Received URL: {url}")  # Debugging output
 
     try:
-        print("Making API request...")
-        response = requests.get(api_endpoint, params=params, timeout=10)  # Add timeout
-        print("API request completed")
-        response.raise_for_status()
-        data = response.json()
-        audio_url = data.get('audio_url')
-
-        if not audio_url:
-            print("No audio URL in response")
-            return jsonify({'error': 'Failed to fetch audio'}), 500
+        # Your existing YouTube extraction logic
+        audio_url = extract_audio(url)  # Replace with your actual function
         
-        return jsonify({'audio_url': audio_url})
+        if not audio_url:
+            return jsonify({"error": "Failed to extract audio"}), 500
 
-    except requests.exceptions.RequestException as e:
-        print("API request failed:", e)
-        return jsonify({'error': 'API request failed'}), 500
+        return jsonify({"audio_url": audio_url})
+
+    except Exception as e:
+        print(f"Error: {e}")  # Print error to console
+        return jsonify({"error": "API request failed"}), 500
 
 if __name__ == '__main__':
     print("Starting Flask server...")
