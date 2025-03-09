@@ -16,7 +16,11 @@ def get_audio():
         return jsonify({"error": "No URL provided"}), 400
 
     try:
-        API_ENDPOINT = "https://www.y2mate.com/mates/en68/analyze/ajax"  # Replace with a working API
+        API_ENDPOINT = "https://youtube-mp3-downloader2.p.rapidapi.com/ytmp3/convert"
+        HEADERS = {
+    "X-RapidAPI-Key": "https://youtube-audio-api-y5wy.onrender.com",  # Replace with your actual API Key
+    "X-RapidAPI-Host": "youtube-mp3-downloader2.p.rapidapi.com"
+}
         params = {"video_url": url, "format": "mp3"}
 
         response = requests.get(API_ENDPOINT, params=params, timeout=10)
