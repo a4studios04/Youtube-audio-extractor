@@ -8,8 +8,8 @@ app = Flask(__name__)
 def home():
     return "Welcome to the YouTube Audio Extractor API!"
 
-@app.route('/get_audio', methods=['GET'])
-def get_audio():
+@app.route('/extract', methods=['GET'])  # Changed from /get_audio to /extract
+def extract_audio():
     url = request.args.get("url")
     if not url:
         return jsonify({"error": "No URL provided"}), 400
