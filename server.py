@@ -18,5 +18,6 @@ def get_audio():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+from waitress import serve
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    serve(app,host="0.0.0.0", port=10000)
