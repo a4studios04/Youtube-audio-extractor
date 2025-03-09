@@ -3,6 +3,9 @@ import requests
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "Welcome to the YouTube Audio Extractor API!"
 @app.route('/get_audio', methods=['GET'])
 def get_audio():
     print("Received request")  # Debugging step
@@ -14,7 +17,7 @@ def get_audio():
     print("Video URL received:", video_url)
 
     # Replace with an actual working API
-    api_endpoint = 'https://api.example.com/convert'
+    api_endpoint = 'https://some-youtube-audio-api.com/extract'
     params = {'video_url': video_url, 'format': 'mp3'}
 
     try:
